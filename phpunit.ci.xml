@@ -5,16 +5,14 @@
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
          bootstrap="vendor/autoload.php"
-         colors="true"
+         cacheResult="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          executionOrder="defects"
-         printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer"
          processIsolation="false"
          stopOnDefect="true"
-         stopOnFailure="true"
-         verbose="true">
+         stopOnFailure="true">
     <testsuites>
         <testsuite name="Unit Tests">
             <directory>tests</directory>
@@ -28,22 +26,9 @@
             </exclude>
         </whitelist>
     </filter>
-    <listeners>
-        <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener">
-            <arguments>
-                <array>
-                    <element key="slowThreshold">
-                        <integer>100</integer>
-                    </element>
-                </array>
-            </arguments>
-        </listener>
-    </listeners>
     <logging>
         <log type="coverage-clover" target="./build/coverage/coverage.xml"/>
-        <log type="coverage-html" target="./build/coverage-report" lowUpperBound="35" highLowerBound="70"/>
         <log type="coverage-xml" target="./build/coverage/coverage-xml"/>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
         <log type="junit" target="./build/coverage/phpunit.junit.xml"/>
     </logging>
 </phpunit>
