@@ -9,10 +9,12 @@ use DateTimeImmutable;
 
 class TokenGenerator extends BaseToken
 {
-    public function generate(string $userId): Token
+    private const DEFAULT_TTL = 3600;
+
+    public function generate(string $userId, int $ttl = self::DEFAULT_TTL): Token
     {
         $token = Token::generate();
-        $expiration = new DateInterval(sprintf('PT%dS', $this->ttl));
+        $expiration = new DateInterval(sprintf('PT%dS', $ttl));
         $tokenExpiration = (new DateTimeImmutable())->add($expiration);
 
         $validator = $this->getHashedVerifier($token->getVerifier(), $userId, $tokenExpiration);

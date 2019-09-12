@@ -8,7 +8,6 @@ use DateTimeImmutable;
 class BaseToken
 {
     private const SIGNING_ALGO = 'sha256';
-    private const DEFAULT_TTL = 3600;
     private const DATE_FORMAT = DATE_RFC3339;
 
     /**
@@ -19,16 +18,11 @@ class BaseToken
      * @var string
      */
     protected $signingKey;
-    /**
-     * @var int
-     */
-    protected $ttl;
 
-    public function __construct(UserTokenRepository $tokenRepository, string $signingKey, int $ttl = self::DEFAULT_TTL)
+    public function __construct(UserTokenRepository $tokenRepository, string $signingKey)
     {
         $this->tokenRepository = $tokenRepository;
         $this->signingKey = $signingKey;
-        $this->ttl = $ttl;
     }
 
     protected function getHashedVerifier(string $verifier, string $userID, DateTimeImmutable $expiration): string
