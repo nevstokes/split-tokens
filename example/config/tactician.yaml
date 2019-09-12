@@ -1,0 +1,24 @@
+tactician:
+  method_inflector: tactician.handler.method_name_inflector.invoke
+  default_bus: command_bus
+  commandbus:
+    command_bus:
+      middleware:
+        - tactician.middleware.locking
+        - tactician.middleware.command_handler
+# todo: configure query_bus
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Tactician\CommandBus\CommandHandler\:
+    resource: '../src/Tactician/CommandBus/CommandHandler'
+    tags:
+      - { name: tactician.handler, typehints: true, bus: command_bus }
+
+  App\Tactician\QueryBus\QueryHandler\:
+    resource: '../src/Tactician/QueryBus/QueryHandler'
+    tags:
+      - { name: tactician.handler, typehints: true, bus: command_bus }

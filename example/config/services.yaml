@@ -1,0 +1,13 @@
+services:
+  _defaults: { autowire : true }
+
+  NevStokes\SplitTokens\Repository\UserTokenRepository:
+    class: NevStokes\SplitTokens\Repository\InMemoryUserTokenRepository
+
+  NevStokes\SplitTokens\Token\TokenGenerator:
+    arguments:
+      $signingKey: '%token.signing_key%'
+
+  App\Action\HomepageAction:
+    tags:
+      - { name: controller.service_arguments }

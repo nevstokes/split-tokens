@@ -1,0 +1,3 @@
+parameters:
+  app.secret: '%env(string:APP_SECRET)%'
+  token.signing_key: '%env(string:TOKEN_SIGNING_KEY)%'

@@ -1,0 +1,6 @@
+imports:
+  - { resource: parameters.yaml }
+  - { resource: framework.yaml }
+  - { resource: services.yaml }
+  - { resource: tactician.yaml }
+  - { resource: templating.yaml }
