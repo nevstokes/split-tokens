@@ -12,8 +12,45 @@ This library will generate and validate authentication tokens. It provides sampl
 
 ### Use
 
-```
+Add the library to your project:
+
+```bash
 composer require nevstokes/split-tokens
+```
+
+#### Generate
+
+A repository needs to be given for token persistence; two are included in this library: `RedisUserTokenRepository` and `DoctrineUserTokenRepository`. A signing key is also required in order to create a <acronym title="M">HMAC</acronym> for the token. If you're using tokens for multiple purposes then you should choose distinct signing keys.
+
+```php
+$generator = new TokenGenerator($userTokenRepository, $signingKey);
+```
+
+To generate a token for a user with a default TTL (one hour):
+
+```php
+$token = $generator->generate($userIdentifier);
+```
+
+You can set a custom TTL with the optional second argument (specified as integer seconds):
+
+```php
+$token = $generator->generate($userIdentifier, $ttl);
+```
+
+#### Validate
+
+Use the same signing key as was used to generate a token to validate it:
+
+```php
+$validator = new TokenValidator($userTokenRepository, $signingKey);
+$validity = $validator->validate($token);
+```
+
+See the [`example`](example) directory for a fully runnable demonstration, which can be started with the following command:
+
+```bash
+make -C example run
 ```
 
 ## Versioning
