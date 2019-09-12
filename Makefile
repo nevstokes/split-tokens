@@ -1,5 +1,3 @@
-.PHONY: unit-tests
-
 # Standard configuration and definitions
 include make/config.mk
 
