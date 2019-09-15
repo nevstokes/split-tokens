@@ -1,3 +1,5 @@
 parameters:
   app.secret: '%env(string:APP_SECRET)%'
+  redis.host: '%env(string:REDIS_HOST)%'
+  redis.token_prefix: '%env(string:REDIS_TOKEN_PREFIX)%'
   token.signing_key: '%env(string:TOKEN_SIGNING_KEY)%'
