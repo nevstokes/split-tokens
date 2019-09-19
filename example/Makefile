@@ -7,10 +7,12 @@ include ../make/config.mk
 include ../make/dotenv.mk
 include ../make/composer.mk
 
-run: .env
+##@ Project
+
+run: .env ## Run the example project
 	docker-compose up -d webserver
 
-stop:
+stop: ## Tear down the example project
 	docker-compose down -v --rmi local --remove-orphans
 
 # Included last to include relevant module config automatically
