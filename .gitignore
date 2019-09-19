@@ -1,4 +1,6 @@
 .*.cache
+composer.lock
+!example/composer.lock
 build
 vendor
 xdebug-filter.php
