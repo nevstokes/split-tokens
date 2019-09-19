@@ -2,7 +2,8 @@ version: '2.4'
 
 services:
   app:
-    image: php:7.3-fpm-alpine3.10
+    build:
+      context: containers/fpm
     working_dir: /var/www
     tmpfs:
       - /tmp:rw,nodev,noexec,nosuid

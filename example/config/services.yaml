@@ -8,8 +8,18 @@ services:
     tags:
       - { name: controller.service_arguments }
 
+  Redis:
+    class: Redis
+    lazy: true
+    calls:
+      - method: connect
+        arguments:
+          - '%redis.host%'
+
   NevStokes\SplitTokens\Repository\UserTokenRepository:
-    class: NevStokes\SplitTokens\Repository\InMemoryUserTokenRepository
+    class: NevStokes\SplitTokens\Repository\RedisUserTokenRepository
+    arguments:
+      $prefix: '%redis.token_prefix%'
 
   NevStokes\SplitTokens\Token\TokenGenerator:
     arguments:

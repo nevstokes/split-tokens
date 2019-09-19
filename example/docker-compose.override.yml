@@ -21,6 +21,18 @@ services:
 
   tokenstore:
     image: redis:alpine@sha256:50899ea1ceed33fa03232f3ac57578a424faa1742c1ac9c7a7bdb95cdf19b858
+    command: redis-server --appendonly yes
+    volumes:
+      - ./tokens:/data
+
+  redis_commander:
+    image: rediscommander/redis-commander
+    environment:
+      - REDIS_HOSTS=tokenstore
+    ports:
+      - 8081
+    depends_on:
+      - tokenstore
 
   webserver:
     volumes:
