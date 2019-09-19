@@ -1,6 +1,7 @@
 imports:
-  - { resource: parameters.yaml }
   - { resource: framework.yaml }
+  - { resource: parameters.yaml }
+  - { resource: param-converters.yaml }
   - { resource: services.yaml }
   - { resource: tactician.yaml }
   - { resource: templating.yaml }

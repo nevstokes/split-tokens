@@ -3,6 +3,7 @@
 namespace App;
 
 use League\Tactician\Bundle\TacticianBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Bundle\TwigBundle\TwigBundle;
@@ -46,6 +47,7 @@ class Kernel extends BaseKernel
     {
         $bundles = [
             new FrameworkBundle(),
+            new SensioFrameworkExtraBundle(),
             new TacticianBundle(),
             new TwigBundle(),
         ];

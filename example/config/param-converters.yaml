@@ -1,0 +1,11 @@
+sensio_framework_extra:
+  view:        { annotations: false }
+  cache:       { annotations: false }
+  security:    { annotations: false }
+  psr_message: { enabled: false }
+
+services:
+  App\Http\ParamConverter\:
+    resource: '../src/Http/ParamConverter'
+    tags:
+      - { name: request.param_converter }
