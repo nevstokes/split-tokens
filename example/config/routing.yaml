@@ -2,3 +2,8 @@ homepage:
   path: '/'
   defaults: { _controller: App\Action\HomepageAction }
   methods: [GET]
+
+redeem:
+  path: '/redeem/{token}'
+  defaults: { _controller: App\Action\RedeemTokenAction }
+  methods: [GET]
