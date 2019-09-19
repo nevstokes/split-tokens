@@ -18,12 +18,20 @@ services:
     ports:
       - 25
       - 80
+    healthcheck:
+      test: wget -q --spider localhost/messages
 
   tokenstore:
     image: redis:alpine@sha256:50899ea1ceed33fa03232f3ac57578a424faa1742c1ac9c7a7bdb95cdf19b858
     command: redis-server --appendonly yes
     volumes:
       - ./tokens:/data
+    healthcheck:
+      test: redis-cli ping | grep -q PONG
+      timeout: 3s
+      interval: 30s
+      start_period: 5s
+      retries: 3
 
   redis_commander:
     image: rediscommander/redis-commander

@@ -10,3 +10,9 @@ services:
 
   webserver:
     image: nginx:mainline-alpine
+    healthcheck:
+      test: wget -q --spider localhost/status
+      timeout: 3s
+      interval: 300s
+      start_period: 5s
+      retries: 3
