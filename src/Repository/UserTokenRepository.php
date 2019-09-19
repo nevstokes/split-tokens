@@ -9,6 +9,8 @@ interface UserTokenRepository
 {
     public function findUserTokenBySelector(string $selector): ?UserToken;
 
+    public function clear(UserToken $token): void;
+
     /**
      * @throws TokenExistsException
      */

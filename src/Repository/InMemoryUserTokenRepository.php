@@ -31,6 +31,15 @@ class InMemoryUserTokenRepository implements UserTokenRepository
         return $currentTime < $userToken->getExpiration() ? $userToken : null;
     }
 
+    public function clear(UserToken $token): void
+    {
+        $selector = $token->getSelector();
+
+        if (isset($this->tokens[$selector])) {
+            unset($this->tokens[$selector]);
+        }
+    }
+
     /**
      * @inheritDoc
      */

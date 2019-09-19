@@ -20,6 +20,10 @@ class TokenValidator extends BaseToken
             $userToken->getExpiration()
         );
 
-        return hash_equals($claim, $userToken->getValidator());
+        if ($valid = hash_equals($claim, $userToken->getValidator())) {
+            $this->tokenRepository->clear($userToken);
+        }
+
+        return $valid;
     }
 }
