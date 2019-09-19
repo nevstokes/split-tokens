@@ -2,6 +2,7 @@
 
 namespace NevStokes\SplitTokens\Token;
 
+use NevStokes\SplitTokens\Exception\TokenExistsException;
 use NevStokes\SplitTokens\ValueObject\Token;
 use NevStokes\SplitTokens\ValueObject\UserToken;
 use DateInterval;
@@ -13,14 +14,22 @@ class TokenGenerator extends BaseToken
 
     public function generate(string $userId, int $ttl = self::DEFAULT_TTL): Token
     {
-        $token = Token::generate();
-        $expiration = new DateInterval(sprintf('PT%dS', $ttl));
-        $tokenExpiration = (new DateTimeImmutable())->add($expiration);
+        do {
+            $regenerate = false;
 
-        $validator = $this->getHashedVerifier($token->getVerifier(), $userId, $tokenExpiration);
-        $userToken = new UserToken($userId, $token->getSelector(), $validator, $tokenExpiration);
+            $token = Token::generate();
+            $expiration = new DateInterval(sprintf('PT%dS', $ttl));
+            $tokenExpiration = (new DateTimeImmutable())->add($expiration);
 
-        $this->tokenRepository->save($userToken);
+            $validator = $this->getHashedVerifier($token->getVerifier(), $userId, $tokenExpiration);
+            $userToken = new UserToken($userId, $token->getSelector(), $validator, $tokenExpiration);
+
+            try {
+                $this->tokenRepository->save($userToken);
+            } catch (TokenExistsException $exception) {
+                $regenerate = true;
+            }
+        } while (false ===$regenerate);
 
         return $token;
     }

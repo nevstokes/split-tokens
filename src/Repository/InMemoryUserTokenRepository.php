@@ -2,6 +2,7 @@
 
 namespace NevStokes\SplitTokens\Repository;
 
+use NevStokes\SplitTokens\Exception\TokenExistsException;
 use NevStokes\SplitTokens\ValueObject\UserToken;
 use DateTimeImmutable;
 
@@ -30,8 +31,17 @@ class InMemoryUserTokenRepository implements UserTokenRepository
         return $currentTime < $userToken->getExpiration() ? $userToken : null;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function save(UserToken $token): void
     {
+        $selector = $token->getSelector();
+
+        if (isset($this->tokens[$selector])) {
+            throw new TokenExistsException(sprintf('Token for selector %s already exists', $selector));
+        }
+
         $this->tokens[$token->getSelector()] = $token;
     }
 }
