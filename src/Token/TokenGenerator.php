@@ -29,7 +29,7 @@ class TokenGenerator extends BaseToken
             } catch (TokenExistsException $exception) {
                 $regenerate = true;
             }
-        } while (false ===$regenerate);
+        } while (true === $regenerate);
 
         return $token;
     }
