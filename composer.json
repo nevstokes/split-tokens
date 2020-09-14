@@ -37,7 +37,7 @@
         "php": ">=7.2"
     },
     "require-dev": {
-        "codedungeon/phpunit-result-printer": "^0.26 || ^0.27",
+        "codedungeon/phpunit-result-printer": "^0.26 || ^0.27 || ^0.29",
         "friendsofphp/php-cs-fixer": "^2.15",
         "johnkary/phpunit-speedtrap": "^3.1",
         "infection/infection": "^0.13",
