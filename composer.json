@@ -39,7 +39,7 @@
     "require-dev": {
         "codedungeon/phpunit-result-printer": "^0.26 || ^0.27",
         "friendsofphp/php-cs-fixer": "^2.15",
-        "johnkary/phpunit-speedtrap": "^3.1",
+        "johnkary/phpunit-speedtrap": "^3.1 || ^4.0",
         "infection/infection": "^0.13",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan-phpunit": "^0.11",
